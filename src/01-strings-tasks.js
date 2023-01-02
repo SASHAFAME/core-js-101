@@ -202,8 +202,21 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  const hover = `${String.fromCharCode(9484) + String.fromCharCode(9472).repeat(width - 2) + String.fromCharCode(9488)}\n`;
+  const middle = `${String.fromCharCode(9474) + String.fromCharCode(32).repeat(width - 2) + String.fromCharCode(9474)}\n`;
+  let middle2 = middle;
+  for (let i = 0; i < height - 3; i += 1) {
+    if (height > 3) {
+      middle2 += middle;
+    }
+  }
+  const footer = `${String.fromCharCode(9492) + String.fromCharCode(9472).repeat(width - 2) + String.fromCharCode(9496)}\n`;
+
+  if (width === 2 && height === 2) {
+    return hover + footer;
+  }
+  return hover + middle2 + footer;
 }
 
 
@@ -223,12 +236,13 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* message */) {
-  // const originalAlpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  // const cipher = 'nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM';
-  // return message.replace(/[a-z]/gi, letter => cipher[originalAlpha.indexOf(letter)]);
-  throw new Error('Not implemented');
+function encodeToRot13(message) {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLM';
+  return message.replace(/[a-z]/gi, (letter) => alphabet[alphabet.indexOf(letter) + 13]);
+  // const alpha = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLM';
+  // return message.replace(/[a-z]/gi, (letter) => alpha[alpha.indexOf(letter) + 13]);
 }
+// throw new Error('Not implemented');
 
 /**
  * Returns true if the value is string; otherwise false.

@@ -222,8 +222,8 @@ function getTail(arr, n) {
  *    +'20,21,22,23,24\n'
  *    +'30,31,32,33,34'
  */
-function toCsvText(/* arr */) {
-  throw new Error('Not implemented');
+function toCsvText(arr) {
+  return arr.join('\n');
 }
 
 /**
@@ -256,11 +256,15 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  // let sum = 0;
-  // const newArr = arr.map((num) => sum += num);
-  // return newArr;
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  let sum = arr[0];
+  return arr.map((curValue, index) => {
+    if (index > 0) {
+      sum += curValue;
+      return sum;
+    }
+    return sum;
+  });
 }
 
 /**
@@ -621,8 +625,21 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const mid = Math.ceil(arr.length / 2);
+
+  let newArr = [];
+  if (arr.length % 2 === 0) {
+    newArr.push(arr.slice(mid, arr.length + 1));
+    newArr.push(arr.slice(0, mid));
+    newArr = newArr[0].concat(newArr[1]);
+  } else {
+    newArr.push(arr.slice(mid, arr.length + 1));
+    newArr.push(arr.slice(mid - 1, mid));
+    newArr.push(arr.slice(0, mid - 1));
+    newArr = newArr[0].concat(newArr[1], newArr[2]);
+  }
+  return newArr;
 }
 
 
